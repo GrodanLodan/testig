@@ -1,3 +1,5 @@
+alert("klicka ok för att fortsätta din bög")
+
 'use strict';
 const _0x3c4fa4 = _0x34ed;
 /**
