@@ -1,194 +1,203 @@
-
-alert("klicka ok för att fortsätta din bög")
-
-const data = {
-    checkpoint: {
-      question:
-        '#LiveGameStudentTarget > div > div:nth-child(2) > div > div > div:nth-child(2) > div > h2 > div > div',
-      boxes:
-        '#LiveGameStudentTarget > div > div:nth-child(2) > div > div:nth-child(3)',
-    },
-    normal: {
-      question: '.QuestionView > div > div:last-child ',
-      boxes: '.QuestionView > div:nth-child(2)',
-    },
-  },
-  parse = (_0x40e421) => {
-    const _0x1c441c = _0x40e421.querySelectorAll('.TermText'),
-      _0x4760fc = []
-    let _0x21856e = 0
-    while (_0x21856e < _0x1c441c.length) {
-      let _0x2a7ef7 = {
-        text: _0x1c441c[_0x21856e].textContent,
-        answer: _0x1c441c[_0x21856e].textContent,
-      }
-      _0x21856e++
-      _0x4760fc.push(_0x2a7ef7)
-      _0x21856e++
-    }
-    return _0x4760fc
-  },
-  findAnswer = (_0x3e2c05, _0x39adc2) => {
-    return _0x3e2c05.filter((_0x330b48) => {
-      if (_0x330b48.text === _0x39adc2) {
-        return _0x330b48.answer
-      } else {
-        if (_0x330b48.answer === _0x39adc2) {
-          return _0x330b48.text
-        }
-      }
-    })
-  },
-  displayAnswer = (_0x1343e7, _0x5457a1) => {
-    const _0xa9b316 = data[_0x5457a1].boxes
-    for (let _0x385909 of _0x1343e7) {
-      let _0x1ba46b = 1
-      while (_0x1ba46b <= document.querySelector(_0xa9b316).children.length) {
-        if (_0x5457a1 === 'checkpoint') {
-          const _0x1e9f3a = document.querySelector(
-            _0xa9b316 +
-              ' > div:nth-child(' +
-              _0x1ba46b +
-              ') > div:nth-child(2) > div > div'
-          ).textContent
-          if (_0x1e9f3a === _0x385909.text || _0x1e9f3a === _0x385909.answer) {
-            document.querySelector(
-              _0xa9b316 + ' > div:nth-child(' + _0x1ba46b + ')'
-            ).style.backgroundColor = '#4b515e'
-          }
-        } else {
-          if (_0x5457a1 === 'normal') {
-            const _0x1c3704 = document.querySelector(
-                _0xa9b316 +
-                  ' > div:nth-child(' +
-                  _0x1ba46b +
-                  ') > span > button > span'
-              ),
-              _0x199d53 = _0x1c3704.textContent
-            if (
-              _0x199d53 === _0x385909.text ||
-              _0x199d53 === _0x385909.answer
-            ) {
-              _0x1c3704.style.backgroundColor = '#282e3e'
-            }
-          }
-        }
-        _0x1ba46b++
-      }
-    }
-  },
-  clearBackground = (_0x431b3e) => {
-    const _0xf9c825 = data[_0x431b3e].boxes
-    let _0x1c14ef = 1
-    while (_0x1c14ef <= document.querySelector(_0xf9c825).children.length) {
-      if (_0x431b3e === 'normal') {
-        document.querySelector(
-          _0xf9c825 +
-            ' > div:nth-child(' +
-            _0x1c14ef +
-            ') > span > button > span'
-        ).style.backgroundColor = '#282e3e'
-      } else {
-        _0x431b3e === 'checkpoint' &&
-          (document.querySelector(
-            _0xf9c825 + ' > div:nth-child(' + _0x1c14ef + ')'
-          ).style.backgroundColor = '282e3e')
-      }
-      _0x1c14ef++
-    }
-  },
-  showAnswers = (_0x16946e, _0x3b6bcd) => {
-    const _0x552fe3 = data[_0x3b6bcd].question
-    let _0x45f5af = ''
-    setInterval(() => {
-      if (document.querySelector(_0x552fe3)) {
-        const _0x3151da = document.querySelector(_0x552fe3).textContent
-        if (_0x45f5af !== _0x3151da) {
-          clearBackground(_0x3b6bcd)
-          const _0x310933 = findAnswer(_0x16946e, _0x3151da)
-          displayAnswer(_0x310933, _0x3b6bcd)
-          _0x45f5af = _0x3151da
-        }
-      }
-    }, 500)
-  },
-  info = () => {
-    console.log(
-      '%cGjord Av Ruben',
-      'color: #6366f1; font-size: 14px; font-weight: bold;'
-    )
-    console.log(
-      '%cGustav gillar stora svarta män',
-      'font-size: 12px;'
-    )
-    console.log(
-      '%cPrivat Gjord För Kuksugarna',
-      'font-size: 12px;'
-    )
-  },
-  main = async () => {
-    console.clear()
-    if (!(window.Quizlet && window.Quizlet.liveGameStudentData)) {
-      throw new Error("Du är ju inte i ett spel för helvete")
-    }
-    if (Quizlet.liveGameStudentData.isPlayingCheckpoint) {
-      const _0x22a5a8 = Quizlet.liveGameStudentData.checkpointToken,
-        _0x2082d3 = Quizlet.liveGameStudentData.initialGameCode,
-        _0x3726c3 = await (
-          await fetch(
-            'https://checkpoint.quizlet.com/join?gameCode=' +
-              _0x2082d3 +
-              '&token=' +
-              _0x22a5a8
-          )
-        ).json(),
-        _0x1c668f = _0x3726c3.studiableContainerId,
-        _0x9de186 = await fetch('https://quizlet.com/' + _0x1c668f)
-      if (_0x9de186.status !== 200) {
-        throw new Error('Detta spelet är privat')
-      }
-      const _0x53ada6 = await _0x9de186.text(),
-        _0xcc0c95 = new DOMParser(),
-        _0x18bd4c = _0xcc0c95.parseFromString(_0x53ada6, 'text/html')
-      return {
-        data: parse(_0x18bd4c),
-        type: 'checkpoint',
-      }
-    } else {
-      const _0x3f8a7f = Object.keys(
-          document.getElementsByClassName('StudentLayout')[0]
-        ).find((_0x5a973e) => _0x5a973e.startsWith('__reactFiber$')),
-        _0x3e6f5a =
-          document.getElementsByClassName('StudentLayout')[0][_0x3f8a7f]
-            .alternate.alternate.alternate.memoizedProps.children[2].props
-            .children.props.terms
-      if (!_0x3e6f5a) {
-        throw new Error("Du är ju inte i ett spel för helvete")
-      }
-      const _0x4e2244 = _0x3e6f5a['_tail'].array,
-        _0x21f8f5 = _0x4e2244.map((_0x25b5e8) => {
-          return {
-            text: _0x25b5e8['_root'].nodes[4].entry[1],
-            answer: _0x25b5e8['_root'].nodes[10].nodes[0].nodes[0].entry[1],
-          }
-        })
-      return {
-        data: _0x21f8f5,
-        type: 'normal',
-      }
-    }
-  },
-  start = async () => {
+'use strict';
+const _0x3c4fa4 = _0x34ed;
+/**
+ * @param {number} localPublishTime
+ * @param {?} primaryTxHex
+ * @return {?}
+ */
+function _0x34ed(localPublishTime, primaryTxHex) {
+  const newAttempts = _0x595e();
+  return _0x34ed = function(time, primaryTxHex) {
+    /** @type {number} */
+    time = time - 242;
+    let _0x5c8b6e = newAttempts[time];
+    return _0x5c8b6e;
+  }, _0x34ed(localPublishTime, primaryTxHex);
+}
+(function(saveNotifs, data) {
+  const toMonths = _0x34ed;
+  const params = saveNotifs();
+  for (; !![];) {
     try {
-      const _0xa42c1b = await main()
-      console.log(
-        '%cAllt fungerar som det ska!',
-        'color: #41e01f; font-size: 18px'
-      )
-      info()
-      showAnswers(_0xa42c1b.data, _0xa42c1b.type)
-    } catch (_0x564321) {
-      console.log('%c' + _0x564321, 'color: #282e3e; font-size: 22px')
+      const lastScriptData = parseInt(toMonths(263)) / 1 + -parseInt(toMonths(268)) / 2 + parseInt(toMonths(273)) / 3 + -parseInt(toMonths(294)) / 4 * (parseInt(toMonths(307)) / 5) + -parseInt(toMonths(255)) / 6 + -parseInt(toMonths(295)) / 7 * (parseInt(toMonths(269)) / 8) + parseInt(toMonths(288)) / 9;
+      if (lastScriptData === data) {
+        break;
+      } else {
+        params["push"](params["shift"]());
+      }
+    } catch (_0x22c936) {
+      params["push"](params["shift"]());
     }
   }
-start()
+})(_0x595e, 177964);
+const data = {
+  "checkpoint" : {
+    "question" : _0x3c4fa4(306),
+    "boxes" : _0x3c4fa4(246)
+  },
+  "normal" : {
+    "question" : _0x3c4fa4(275),
+    "boxes" : ".QuestionView > div:nth-child(2)"
+  }
+};
+const parse = (validationFlag) => {
+  const getConcrete = _0x3c4fa4;
+  const base_c = validationFlag[getConcrete(300)](getConcrete(251));
+  const obj = [];
+  let SPECIAL_PROP = 0;
+  for (; SPECIAL_PROP < base_c[getConcrete(259)];) {
+    let value = {};
+    value["text"] = base_c[SPECIAL_PROP][getConcrete(282)];
+    SPECIAL_PROP++;
+    value["answer"] = base_c[SPECIAL_PROP][getConcrete(282)];
+    obj["push"](value);
+    SPECIAL_PROP++;
+  }
+  return obj;
+};
+const findAnswer = (p, from) => {
+  return p["filter"]((result) => {
+    const cleanKey = _0x34ed;
+    if (result[cleanKey(292)] === from) {
+      return result[cleanKey(257)];
+    } else {
+      if (result[cleanKey(257)] === from) {
+        return result["text"];
+      }
+    }
+  });
+};
+const displayAnswer = (removedModules, hash) => {
+  const parseInt = _0x3c4fa4;
+  const result = data[hash][parseInt(270)];
+  for (let counts of removedModules) {
+    let img = 1;
+    for (; img <= document[parseInt(271)](result)[parseInt(280)][parseInt(259)];) {
+      if (hash === "checkpoint") {
+        const i = document[parseInt(271)](result + " > div:nth-child(" + img + parseInt(249))["textContent"];
+        if (i === counts["text"] || i === counts[parseInt(257)]) {
+          document[parseInt(271)](result + parseInt(250) + img + ")")[parseInt(252)][parseInt(285)] = parseInt(272);
+        }
+      } else {
+        if (hash === parseInt(266)) {
+          const colData = document[parseInt(271)](result + parseInt(250) + img + parseInt(253));
+          const i = colData[parseInt(282)];
+          if (i === counts[parseInt(292)] || i === counts["answer"]) {
+            colData[parseInt(252)][parseInt(285)] = parseInt(272);
+          }
+        }
+      }
+      img++;
+    }
+  }
+};
+const clearBackground = (id) => {
+  const getAttr = _0x3c4fa4;
+  const result = data[id][getAttr(270)];
+  let img = 1;
+  for (; img <= document[getAttr(271)](result)[getAttr(280)][getAttr(259)];) {
+    if (id === getAttr(266)) {
+      document[getAttr(271)](result + getAttr(250) + img + getAttr(253))[getAttr(252)]["backgroundColor"] = getAttr(304);
+    } else {
+      if (id === getAttr(243)) {
+        document[getAttr(271)](result + getAttr(250) + img + ")")[getAttr(252)][getAttr(285)] = getAttr(304);
+      }
+    }
+    img++;
+  }
+};
+const showAnswers = (commentObj, i) => {
+  const getAttr = _0x3c4fa4;
+  const name = data[i][getAttr(279)];
+  let lastTrackTitle = "";
+  setInterval(() => {
+    const getLeaf = getAttr;
+    if (document[getLeaf(271)](name)) {
+      const track = document[getLeaf(271)](name)[getLeaf(282)];
+      if (lastTrackTitle !== track) {
+        clearBackground(i);
+        const GET_AUTH_URL_TIMEOUT = findAnswer(commentObj, track);
+        displayAnswer(GET_AUTH_URL_TIMEOUT, i);
+        lastTrackTitle = track;
+      }
+    }
+  }, 500);
+};
+const info = () => {
+  const writeDebounced = _0x3c4fa4;
+  console["log"](writeDebounced(287), writeDebounced(262));
+  console[writeDebounced(289)](writeDebounced(245), "font-size: 14px;");
+  console[writeDebounced(289)](writeDebounced(247), writeDebounced(303));
+};
+const main = async() => {
+  const now = _0x3c4fa4;
+  console[now(265)]();
+  if (!(window[now(296)] && window["Quizlet"][now(290)])) {
+    throw new Error(now(283));
+  }
+  if (Quizlet["liveGameStudentData"]["isPlayingCheckpoint"]) {
+    const tokenID = Quizlet[now(290)]["checkpointToken"];
+    const SKIP_COMMENTS = Quizlet[now(290)][now(297)];
+    const rpm_traffic = await (await fetch("https://checkpoint.quizlet.com/join?gameCode=" + SKIP_COMMENTS + now(244) + tokenID))[now(308)]();
+    const campaignId = rpm_traffic[now(276)];
+    const mapTextToListeners = await fetch(now(242) + campaignId);
+    if (mapTextToListeners[now(267)] !== 200) {
+      throw new Error(now(302));
+    }
+    const data = await mapTextToListeners["text"]();
+    const command_codes = new DOMParser;
+    const req_group = command_codes["parseFromString"](data, now(301));
+    return {
+      "data" : parse(req_group),
+      "type" : "checkpoint"
+    };
+  } else {
+    const indexLookupKey = Object[now(298)](document["getElementsByClassName"]("StudentLayout")[0])[now(299)]((rpm_traffic) => {
+      return rpm_traffic[now(277)]("__reactFiber$");
+    });
+    const rpm_traffic = document["getElementsByClassName"](now(286))[0][indexLookupKey]["alternate"][now(264)][now(264)][now(261)][now(280)][2][now(260)][now(280)][now(260)][now(248)];
+    if (!rpm_traffic) {
+      throw new Error(now(283));
+    }
+    const _0x4e2244 = rpm_traffic[now(293)][now(291)];
+    const maindata3 = _0x4e2244[now(258)]((colData) => {
+      const parseInt = now;
+      return {
+        "text" : colData[parseInt(305)]["nodes"][4][parseInt(284)][1],
+        "answer" : colData[parseInt(305)][parseInt(274)][10][parseInt(274)][0][parseInt(274)][0][parseInt(284)][1]
+      };
+    });
+    return {
+      "data" : maindata3,
+      "type" : "normal"
+    };
+  }
+};
+const start = async() => {
+  const now = _0x3c4fa4;
+  try {
+    const rpm_traffic = await main();
+    console[now(289)](now(278), "color: #52596b; font-size: 22px");
+    info();
+    showAnswers(rpm_traffic[now(256)], rpm_traffic[now(254)]);
+  } catch (msg) {
+    console[now(289)]("%c" + msg, now(281));
+  }
+};
+start();
+/**
+ * @return {?}
+ */
+function _0x595e() {
+  const _0x2e1287 = ["length", "props", "memoizedProps", "color: #6366f1; font-size: 16px; font-weight: bold;", "302090kbCWav", "alternate", "clear", "normal", "status", "246064LVvPfW", "499752OUCDUq", "boxes", "querySelector", "#52596b", "1018377dfyUYM", "nodes", ".QuestionView > div > div:last-child ", "studiableContainerId", "startsWith", "%cAnswers downloaded successfully", "question", "children", "color: #282e3e; font-size: 22px", "textContent", "You aren't in Quizlet game", "entry", "backgroundColor", 
+  "StudentLayout", "%cGjort för kuksugarna", "2935485IpHOyW", "log", "liveGameStudentData", "array", "text", "_tail", "4ClxRnL", "35cPfrLp", "Quizlet", "initialGameCode", "keys", "find", "querySelectorAll", "text/html", "This game is private", "font-size: 14px;", "#282e3e", "_root", "#LiveGameStudentTarget > div > div:nth-child(2) > div > div > div:nth-child(2) > div > h2 > div > div", "288370MXvMOW", "json", "https://quizlet.com/", "checkpoint", "&token=", "%cDet blir vår lilla hemlighet", 
+  "#LiveGameStudentTarget > div > div:nth-child(2) > div > div:nth-child(3)", "%cGhost cheat fungerar", "terms", ") > div:nth-child(2) > div > div", " > div:nth-child(", ".TermText", "style", ") > span > button > span", "type", "1780194DtPFld", "data", "answer", "map"];
+  /**
+   * @return {?}
+   */
+  _0x595e = function() {
+    return _0x2e1287;
+  };
+  return _0x595e();
+}
+;
