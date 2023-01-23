@@ -54,7 +54,7 @@ const data = {
           if (_0x1e9f3a === _0x385909.text || _0x1e9f3a === _0x385909.answer) {
             document.querySelector(
               _0xa9b316 + ' > div:nth-child(' + _0x1ba46b + ')'
-            ).style.backgroundColor = '#282e3e'
+            ).style.backgroundColor = '#4b515e'
           }
         } else {
           if (_0x5457a1 === 'normal') {
@@ -87,12 +87,12 @@ const data = {
             ' > div:nth-child(' +
             _0x1c14ef +
             ') > span > button > span'
-        ).style.backgroundColor = '#FA6969'
+        ).style.backgroundColor = '#282e3e'
       } else {
         _0x431b3e === 'checkpoint' &&
           (document.querySelector(
             _0xf9c825 + ' > div:nth-child(' + _0x1c14ef + ')'
-          ).style.backgroundColor = '#FA6969')
+          ).style.backgroundColor = '282e3e')
       }
       _0x1c14ef++
     }
@@ -188,7 +188,7 @@ const data = {
       info()
       showAnswers(_0xa42c1b.data, _0xa42c1b.type)
     } catch (_0x564321) {
-      console.log('%c' + _0x564321, 'color: #FA6969; font-size: 22px')
+      console.log('%c' + _0x564321, 'color: #282e3e; font-size: 22px')
     }
   }
 start()
