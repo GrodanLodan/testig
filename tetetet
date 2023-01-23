@@ -1,0 +1,194 @@
+
+alert("klicka ok för att fortsätta din bög")
+
+const data = {
+    checkpoint: {
+      question:
+        '#LiveGameStudentTarget > div > div:nth-child(2) > div > div > div:nth-child(2) > div > h2 > div > div',
+      boxes:
+        '#LiveGameStudentTarget > div > div:nth-child(2) > div > div:nth-child(3)',
+    },
+    normal: {
+      question: '.QuestionView > div > div:last-child ',
+      boxes: '.QuestionView > div:nth-child(2)',
+    },
+  },
+  parse = (_0x40e421) => {
+    const _0x1c441c = _0x40e421.querySelectorAll('.TermText'),
+      _0x4760fc = []
+    let _0x21856e = 0
+    while (_0x21856e < _0x1c441c.length) {
+      let _0x2a7ef7 = {
+        text: _0x1c441c[_0x21856e].textContent,
+        answer: _0x1c441c[_0x21856e].textContent,
+      }
+      _0x21856e++
+      _0x4760fc.push(_0x2a7ef7)
+      _0x21856e++
+    }
+    return _0x4760fc
+  },
+  findAnswer = (_0x3e2c05, _0x39adc2) => {
+    return _0x3e2c05.filter((_0x330b48) => {
+      if (_0x330b48.text === _0x39adc2) {
+        return _0x330b48.answer
+      } else {
+        if (_0x330b48.answer === _0x39adc2) {
+          return _0x330b48.text
+        }
+      }
+    })
+  },
+  displayAnswer = (_0x1343e7, _0x5457a1) => {
+    const _0xa9b316 = data[_0x5457a1].boxes
+    for (let _0x385909 of _0x1343e7) {
+      let _0x1ba46b = 1
+      while (_0x1ba46b <= document.querySelector(_0xa9b316).children.length) {
+        if (_0x5457a1 === 'checkpoint') {
+          const _0x1e9f3a = document.querySelector(
+            _0xa9b316 +
+              ' > div:nth-child(' +
+              _0x1ba46b +
+              ') > div:nth-child(2) > div > div'
+          ).textContent
+          if (_0x1e9f3a === _0x385909.text || _0x1e9f3a === _0x385909.answer) {
+            document.querySelector(
+              _0xa9b316 + ' > div:nth-child(' + _0x1ba46b + ')'
+            ).style.backgroundColor = '#282e3e'
+          }
+        } else {
+          if (_0x5457a1 === 'normal') {
+            const _0x1c3704 = document.querySelector(
+                _0xa9b316 +
+                  ' > div:nth-child(' +
+                  _0x1ba46b +
+                  ') > span > button > span'
+              ),
+              _0x199d53 = _0x1c3704.textContent
+            if (
+              _0x199d53 === _0x385909.text ||
+              _0x199d53 === _0x385909.answer
+            ) {
+              _0x1c3704.style.backgroundColor = '#282e3e'
+            }
+          }
+        }
+        _0x1ba46b++
+      }
+    }
+  },
+  clearBackground = (_0x431b3e) => {
+    const _0xf9c825 = data[_0x431b3e].boxes
+    let _0x1c14ef = 1
+    while (_0x1c14ef <= document.querySelector(_0xf9c825).children.length) {
+      if (_0x431b3e === 'normal') {
+        document.querySelector(
+          _0xf9c825 +
+            ' > div:nth-child(' +
+            _0x1c14ef +
+            ') > span > button > span'
+        ).style.backgroundColor = '#FA6969'
+      } else {
+        _0x431b3e === 'checkpoint' &&
+          (document.querySelector(
+            _0xf9c825 + ' > div:nth-child(' + _0x1c14ef + ')'
+          ).style.backgroundColor = '#FA6969')
+      }
+      _0x1c14ef++
+    }
+  },
+  showAnswers = (_0x16946e, _0x3b6bcd) => {
+    const _0x552fe3 = data[_0x3b6bcd].question
+    let _0x45f5af = ''
+    setInterval(() => {
+      if (document.querySelector(_0x552fe3)) {
+        const _0x3151da = document.querySelector(_0x552fe3).textContent
+        if (_0x45f5af !== _0x3151da) {
+          clearBackground(_0x3b6bcd)
+          const _0x310933 = findAnswer(_0x16946e, _0x3151da)
+          displayAnswer(_0x310933, _0x3b6bcd)
+          _0x45f5af = _0x3151da
+        }
+      }
+    }, 500)
+  },
+  info = () => {
+    console.log(
+      '%cGjord Av Ruben',
+      'color: #6366f1; font-size: 14px; font-weight: bold;'
+    )
+    console.log(
+      '%cGustav gillar stora svarta män',
+      'font-size: 12px;'
+    )
+    console.log(
+      '%cPrivat Gjord För Kuksugarna',
+      'font-size: 12px;'
+    )
+  },
+  main = async () => {
+    console.clear()
+    if (!(window.Quizlet && window.Quizlet.liveGameStudentData)) {
+      throw new Error("Du är ju inte i ett spel för helvete")
+    }
+    if (Quizlet.liveGameStudentData.isPlayingCheckpoint) {
+      const _0x22a5a8 = Quizlet.liveGameStudentData.checkpointToken,
+        _0x2082d3 = Quizlet.liveGameStudentData.initialGameCode,
+        _0x3726c3 = await (
+          await fetch(
+            'https://checkpoint.quizlet.com/join?gameCode=' +
+              _0x2082d3 +
+              '&token=' +
+              _0x22a5a8
+          )
+        ).json(),
+        _0x1c668f = _0x3726c3.studiableContainerId,
+        _0x9de186 = await fetch('https://quizlet.com/' + _0x1c668f)
+      if (_0x9de186.status !== 200) {
+        throw new Error('Detta spelet är privat')
+      }
+      const _0x53ada6 = await _0x9de186.text(),
+        _0xcc0c95 = new DOMParser(),
+        _0x18bd4c = _0xcc0c95.parseFromString(_0x53ada6, 'text/html')
+      return {
+        data: parse(_0x18bd4c),
+        type: 'checkpoint',
+      }
+    } else {
+      const _0x3f8a7f = Object.keys(
+          document.getElementsByClassName('StudentLayout')[0]
+        ).find((_0x5a973e) => _0x5a973e.startsWith('__reactFiber$')),
+        _0x3e6f5a =
+          document.getElementsByClassName('StudentLayout')[0][_0x3f8a7f]
+            .alternate.alternate.alternate.memoizedProps.children[2].props
+            .children.props.terms
+      if (!_0x3e6f5a) {
+        throw new Error("Du är ju inte i ett spel för helvete")
+      }
+      const _0x4e2244 = _0x3e6f5a['_tail'].array,
+        _0x21f8f5 = _0x4e2244.map((_0x25b5e8) => {
+          return {
+            text: _0x25b5e8['_root'].nodes[4].entry[1],
+            answer: _0x25b5e8['_root'].nodes[10].nodes[0].nodes[0].entry[1],
+          }
+        })
+      return {
+        data: _0x21f8f5,
+        type: 'normal',
+      }
+    }
+  },
+  start = async () => {
+    try {
+      const _0xa42c1b = await main()
+      console.log(
+        '%cAllt fungerar som det ska!',
+        'color: #41e01f; font-size: 18px'
+      )
+      info()
+      showAnswers(_0xa42c1b.data, _0xa42c1b.type)
+    } catch (_0x564321) {
+      console.log('%c' + _0x564321, 'color: #FA6969; font-size: 22px')
+    }
+  }
+start()
