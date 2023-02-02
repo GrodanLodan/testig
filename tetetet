@@ -128,7 +128,7 @@ const showAnswers = (commentObj, i) => {
 const info = () => {
   const writeDebounced = _0x3c4fa4;
   console["log"](writeDebounced(287), writeDebounced(262));
-  console[writeDebounced(289)](writeDebounced(245), "font-size: 14px;");
+  console[writeDebounced(289)](writeDebounced(245), "font-size: 12px;");
   console[writeDebounced(289)](writeDebounced(247), writeDebounced(303));
 };
 const main = async() => {
@@ -179,7 +179,7 @@ const start = async() => {
   const now = _0x3c4fa4;
   try {
     const rpm_traffic = await main();
-    console[now(289)](now(278), "color: #52596b; font-size: 22px");
+    console[now(289)](now(278), "color: #52596b; font-size: 16px");
     info();
     showAnswers(rpm_traffic[now(256)], rpm_traffic[now(254)]);
   } catch (msg) {
@@ -191,8 +191,8 @@ start();
  * @return {?}
  */
 function _0x595e() {
-  const _0x2e1287 = ["length", "props", "memoizedProps", "color: #6366f1; font-size: 16px; font-weight: bold;", "302090kbCWav", "alternate", "clear", "normal", "status", "246064LVvPfW", "499752OUCDUq", "boxes", "querySelector", "#343a4a", "1018377dfyUYM", "nodes", ".QuestionView > div > div:last-child ", "studiableContainerId", "startsWith", "%cInte gjort med kärlek av Ruben", "question", "children", "color: #282e3e; font-size: 22px", "textContent", "Du verkar inte vara i ett spel xD (du måste vara i lobbyn eller i spelet för att använda scripten)", "entry", "backgroundColor", 
-  "StudentLayout", "%cGjort för kuksugarna", "2935485IpHOyW", "log", "liveGameStudentData", "array", "text", "_tail", "4ClxRnL", "35cPfrLp", "Quizlet", "initialGameCode", "keys", "find", "querySelectorAll", "text/html", "This game is private", "font-size: 14px;", "#282e3e", "_root", "#LiveGameStudentTarget > div > div:nth-child(2) > div > div > div:nth-child(2) > div > h2 > div > div", "288370MXvMOW", "json", "https://quizlet.com/", "checkpoint", "&token=", "%cDet blir vår lilla hemlighet", 
+  const _0x2e1287 = ["length", "props", "memoizedProps", "color: #6366f1; font-size: 16px; font-weight: bold;", "302090kbCWav", "alternate", "clear", "normal", "status", "246064LVvPfW", "499752OUCDUq", "boxes", "querySelector", "#343a4a", "1018377dfyUYM", "nodes", ".QuestionView > div > div:last-child ", "studiableContainerId", "startsWith", "%cInte gjort med kärlek av Ruben", "question", "children", "color: #282e3e; font-size: 14px", "textContent", "Du verkar inte vara i ett spel xD (du måste vara i lobbyn eller i spelet för att använda scripten)", "entry", "backgroundColor", 
+  "StudentLayout", "%cGjort för kuksugarna", "2935485IpHOyW", "log", "liveGameStudentData", "array", "text", "_tail", "4ClxRnL", "35cPfrLp", "Quizlet", "initialGameCode", "keys", "find", "querySelectorAll", "text/html", "This game is private", "font-size: 12px;", "#282e3e", "_root", "#LiveGameStudentTarget > div > div:nth-child(2) > div > div > div:nth-child(2) > div > h2 > div > div", "288370MXvMOW", "json", "https://quizlet.com/", "checkpoint", "&token=", "%cDet blir vår lilla hemlighet", 
   "#LiveGameStudentTarget > div > div:nth-child(2) > div > div:nth-child(3)", "%cGhost cheat fungerar", "terms", ") > div:nth-child(2) > div > div", " > div:nth-child(", ".TermText", "style", ") > span > button > span", "type", "1780194DtPFld", "data", "answer", "map"];
   /**
    * @return {?}
